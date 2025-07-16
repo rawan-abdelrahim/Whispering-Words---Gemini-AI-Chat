@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whispering Words - Gemini AI Chat</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+  <div class="chat-wrapper">
+    <header class="chat-header">
+      <h1>Whispering Words</h1>
+      <p>Your elegant AI conversationalist</p>
+    </header>
+    <main class="chat-container">
+      <div id="chat-history" class="chat-history" aria-live="polite">
+        <div class="message ai-message initial-message fade-in">
+          <p>Welcome, dear patron. How may I assist your inquiries today?</p>
+        </div>
+      </div>
+      <form id="chat-form" class="chat-form" aria-label="Send a message">
+        <label for="user-input" class="sr-only">Type your message</label>
+        <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" />
+
+        <div class="file-upload-group">
+          <label for="image-upload" class="icon-button" title="Attach an image">
+            🖼️
+            <input type="file" id="image-upload" accept="image/*" class="sr-only" />
+          </label>
+          <label for="file-upload" class="icon-button" title="Attach a document">
+            📎
+            <input type="file" id="file-upload" accept=".pdf,.doc,.docx,.txt" class="sr-only" />
+          </label>
+        </div>
+
+        <button type="submit" aria-label="Send message">Send</button>
+      </form>
+      <div id="attached-item-preview-container" class="attached-item-preview-container">
+      </div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>

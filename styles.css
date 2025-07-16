@@ -1,0 +1,761 @@
+:root {
+  --primary-bg: #F8F4E3;
+  /* Light Cream */
+  --secondary-bg: #EAE6D7;
+  /* Slightly darker cream/beige */
+  --text-color: #2e3136;
+  /* Deep Charcoal */
+  --accent-color: #917140;
+  /* Muted Gold/Bronze */
+  --border-color: #CFCBC0;
+  /* Soft Grey/Taupe */
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --hover-shadow: rgba(0, 0, 0, 0.15);
+  /* Stronger shadow on hover */
+  --light-shine: rgba(255, 255, 255, 0.5);
+  /* Subtle white highlight for shine */
+  --animation-duration: 0.5s;
+  --transition-speed: 0.3s ease-in-out;
+  --fast-transition: 0.15s ease-out;
+  /* For quicker button presses */
+  --message-fade-in-duration: 0.4s;
+  /* Specific for message animation */
+
+  /* UPDATED: Variables for Notion-like Code Styling */
+  --notion-code-bg: #f6f6f6;
+  /* Very light, clean grey */
+  --notion-code-border: #f8e1c0;
+  /* Subtle border color */
+  --notion-code-text: #4a4a4a;
+  /* Dark grey for code text */
+  --list-marker-color: #A0A0A0;
+  /* Muted color for list bullets/numbers */
+}
+
+/* Basic Reset & Body Styling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lora', serif;
+  /* Body text font */
+  color: var(--text-color);
+  background-color: var(--primary-bg);
+  /* Light cream background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 30px;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Cormorant Garamond', serif;
+  /* Heading font */
+  color: var(--accent-color);
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  /* Medium weight for elegance */
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+/* Accessibility: Visually hide content but keep it for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Chat Wrapper (Overall Layout) */
+.chat-wrapper {
+  width: 100%;
+  max-width: 800px;
+  /* Slightly wider for a more spacious feel */
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  /* Softer, more pronounced rounded corners */
+  overflow: hidden;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  /* More prominent, yet still soft shadow */
+  background: linear-gradient(145deg, var(--secondary-bg), #d9d4c7);
+  /* Manually darkened var(--secondary-bg) */
+  border: 1px solid var(--border-color);
+  /* Elegant border */
+}
+
+/* Chat Header */
+.chat-header {
+  text-align: center;
+  padding: 25px 30px;
+  background-color: var(--secondary-bg);
+  /* Match secondary background */
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  /* Very light shadow below header */
+}
+
+.chat-header h1 {
+  font-size: 2.5em;
+  /* Larger, more impactful heading */
+  font-weight: 700;
+  /* Bold for title */
+  letter-spacing: 0.02em;
+  margin-bottom: 0.1em;
+  color: var(--accent-color);
+  /* Muted gold for the title */
+}
+
+.chat-header p {
+  font-size: 1.1em;
+  font-style: italic;
+  opacity: 0.8;
+  color: var(--text-color);
+}
+
+/* Chat Container (Main content area) */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: var(--secondary-bg);
+  /* Ensures consistent background */
+}
+
+/* Chat History Area */
+#chat-history {
+  flex-grow: 1;
+  padding: 30px;
+  overflow-y: auto;
+  /* Scrollable chat history */
+  max-height: 60vh;
+  /* Adjust as needed for various screen sizes */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  /* Slightly more space between messages */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
+  background-color: var(--primary-bg);
+  /* Lighter background for the chat bubbles area */
+  border-bottom: 1px solid var(--border-color);
+  /* Separator from input */
+}
+
+/* Individual Message Styling */
+.message {
+  padding: 15px 22px;
+  border-radius: 25px;
+  /* More pronounced pill shape */
+  max-width: 80%;
+  /* Give more room */
+  word-wrap: break-word;
+  line-height: 1.6;
+  font-size: 1.05em;
+  box-shadow: 0 2px 6px var(--shadow-color);
+  /* Subtle shadow for depth */
+  transition: transform var(--fast-transition), opacity var(--fast-transition);
+  /* Smooth entrance/hover */
+  color: var(--text-color);
+  position: relative;
+  /* For potential small elements inside */
+  text-align: left;
+  /* Default text alignment for messages */
+}
+
+/* User Message */
+.user-message {
+  align-self: flex-end;
+  /* Align user messages to the right */
+  background-color: var(--accent-color);
+  /* User messages in muted gold */
+  color: #FFFFFF;
+  /* White text on gold */
+  border-bottom-right-radius: 8px;
+  /* Slightly squared off corner for the speaker */
+  margin-right: 5px;
+  /* Small offset from edge */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  /* Slightly stronger shadow */
+}
+
+/* AI Message */
+.ai-message {
+  align-self: flex-start;
+  /* Align AI messages to the left */
+  background-color: #FFFFFF;
+  /* AI messages in crisp white */
+  border: 1px solid var(--border-color);
+  /* Light border for AI message */
+  border-bottom-left-radius: 8px;
+  /* Slightly squared off corner for the speaker */
+  margin-left: 5px;
+  /* Small offset from edge */
+  box-shadow: 0 2px 6px var(--shadow-color);
+  padding: 15px 22px;
+  /* Ensure consistent padding */
+  text-align: left;
+  /* Ensure text alignment is left within AI messages */
+}
+
+/* Specific styling for content within AI messages */
+.ai-message p {
+  margin-top: 0;
+  margin-bottom: 0.8em;
+}
+
+.ai-message p:last-child {
+  margin-bottom: 0;
+}
+
+.ai-message h1,
+.ai-message h2,
+.ai-message h3,
+.ai-message h4,
+.ai-message h5,
+.ai-message h6 {
+  color: var(--text-color);
+  font-family: 'Lora', serif;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-size: 1.1em;
+}
+
+.ai-message ul,
+.ai-message ol {
+  padding-left: 25px;
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+.ai-message li {
+  margin-bottom: 0.5em;
+  line-height: 1.5;
+}
+
+.ai-message ul li::before {
+  content: '\2022';
+  color: var(--list-marker-color);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.ai-message blockquote {
+  border-left: 3px solid var(--border-color);
+  padding-left: 15px;
+  margin-left: 0;
+  font-style: italic;
+  color: #555555;
+}
+
+/* UPDATED CODE BLOCK STYLES (Notion-like) */
+.ai-message pre {
+  background-color: var(--notion-code-bg);
+  /* Very light background */
+  color: var(--notion-code-text);
+  /* Soft dark text */
+  padding: 15px 20px;
+  /* Generous padding */
+  border-radius: 8px;
+  /* Removed overflow-x: auto; */
+  overflow-y: auto;
+  /* Allow vertical scrolling for long code blocks */
+  max-height: 200px;
+  /* IMPORTANT: Limit height to enable vertical scrolling */
+  font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+  /* Classic monospaced fonts */
+  font-size: 0.9em;
+  /* Slightly smaller for density */
+  line-height: 1.4;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 1px solid var(--notion-code-border);
+  /* Subtle border */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.02);
+  /* Very subtle inner shadow for depth */
+  white-space: pre-wrap;
+  /* Ensures long lines wrap */
+  word-break: break-word;
+  /* Breaks long words if necessary */
+}
+
+/* UPDATED INLINE CODE STYLES (Notion-like) */
+.ai-message code {
+  background-color: var(--notion-code-bg);
+  color: var(--notion-code-text);
+  padding: 3px 6px;
+  /* Slightly refined padding */
+  border-radius: 4px;
+  /* Slightly less rounded */
+  font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.85em;
+  /* Slightly smaller than block code */
+  white-space: nowrap;
+  /* Prevent breaking in the middle of inline code */
+  border: 1px solid var(--notion-code-border);
+  /* Subtle border for inline code */
+}
+
+/* Strong/bold text within AI messages */
+.ai-message strong,
+.ai-message b {
+  color: #694c1a;
+  font-weight: 700;
+}
+
+/* Italic text within AI messages */
+.ai-message em,
+.ai-message i {
+  font-style: italic;
+  color: #575757;
+}
+
+/* Links within AI messages */
+.ai-message a {
+  color: var(--accent-color);
+  text-decoration: underline;
+  transition: color var(--fast-transition);
+}
+
+.ai-message a:hover {
+  color: #604F34;
+}
+
+
+/* Initial Message (e.g., "Welcome...") */
+.initial-message {
+  font-style: italic;
+  opacity: 0.9;
+  text-align: center;
+  align-self: center;
+  max-width: 90%;
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+  box-shadow: none;
+  border: 1px solid var(--border-color);
+  padding: 18px 25px;
+  border-radius: 12px;
+}
+
+
+/* Chat Form (Input Area) */
+.chat-form {
+  display: flex;
+  padding: 20px 30px;
+  background-color: var(--secondary-bg);
+  gap: 15px;
+  align-items: center;
+}
+
+#user-input {
+  flex-grow: 1;
+  padding: 14px 22px;
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  font-size: 1.05em;
+  font-family: 'Lora', serif;
+  outline: none;
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+  background-color: #FFFFFF;
+  color: var(--text-color);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+#user-input::placeholder {
+  color: var(--text-color);
+  opacity: 0.6;
+  font-style: italic;
+}
+
+#user-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px rgba(112, 92, 61, 0.15), inset 0 1px 4px rgba(0, 0, 0, 0.1);
+  background-color: #FFFAF5;
+}
+
+/* File Upload Group */
+.file-upload-group {
+  display: flex;
+  gap: 8px;
+  /* Space between the two upload buttons */
+}
+
+/* Icon Buttons (for image and file upload) */
+.icon-button {
+  font-size: 1.8em;
+  /* Large icon */
+  cursor: pointer;
+  color: var(--accent-color);
+  transition: color var(--fast-transition);
+  padding: 0 5px;
+  /* Give a little space around the icon */
+  display: inline-flex;
+  /* Align text vertically */
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  /* Make them circular */
+  width: 40px;
+  /* Fixed width for circular button */
+  height: 40px;
+  /* Fixed height for circular button */
+  box-sizing: border-box;
+  /* Include padding and border in element's total width and height */
+}
+
+.icon-button:hover {
+  color: #604F34;
+  /* Darker accent on hover */
+  background-color: rgba(145, 113, 64, 0.1);
+  /* Subtle background highlight on hover */
+}
+
+
+/* Attached Item Preview Container */
+.attached-item-preview-container {
+  padding: 0 30px 10px;
+  /* Padding to align with chat form */
+  background-color: var(--secondary-bg);
+  display: flex;
+  justify-content: flex-end;
+  /* Align preview to the right */
+  min-height: 40px;
+  /* Ensure space even if no preview */
+  align-items: center;
+  /* Vertically align items */
+}
+
+.attached-item-preview {
+  position: relative;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  padding: 5px 10px;
+  background-color: #FFFFFF;
+}
+
+/* Specific styling for image preview */
+.image-preview {
+  width: 100px;
+  /* Fixed size for image preview */
+  height: 100px;
+  flex-direction: column;
+  /* Stack image and name */
+  padding: 0;
+  /* Remove padding as content will fill */
+}
+
+.image-preview img {
+  width: 100%;
+  height: 70%;
+  /* Image takes 70% of height */
+  object-fit: cover;
+  /* Cover the div without distorting aspect ratio */
+  border-bottom: 1px solid var(--border-color);
+  /* Separator for name */
+}
+
+.image-preview .file-name {
+  font-size: 0.8em;
+  padding: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 90%;
+  /* Constrain name width */
+  text-align: center;
+}
+
+
+/* Specific styling for file preview */
+.file-preview {
+  flex-direction: row;
+  /* Icon and name side-by-side */
+  gap: 8px;
+  max-width: 250px;
+  /* Limit width for longer names */
+}
+
+.file-preview .file-icon {
+  font-size: 1.5em;
+  /* Larger icon for files */
+}
+
+.file-preview .file-name {
+  font-size: 0.9em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  /* Allow name to take available space */
+}
+
+.remove-attachment {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #CC0000;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: background-color var(--fast-transition);
+}
+
+.remove-attachment:hover {
+  background-color: #FF3333;
+}
+
+
+/* User message attached file info */
+.user-message .attached-file-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  /* Slightly lighter background within user message */
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  color: var(--text-color);
+  /* Ensure text is readable on accent bg */
+}
+
+.user-message .attached-file-info .file-icon {
+  font-size: 1.2em;
+  color: var(--text-color);
+}
+
+.user-message .attached-file-info .file-name {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.user-message .attached-file-info .file-backend-note {
+  font-size: 0.85em;
+  color: #555555;
+  margin: 0;
+  font-style: italic;
+}
+
+
+/* Send Button */
+.chat-form button {
+  background-color: var(--accent-color);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 30px;
+  font-size: 1.05em;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform var(--fast-transition), box-shadow var(--transition-speed);
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-form button:hover {
+  background-color: #604F34;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px var(--hover-shadow);
+}
+
+.chat-form button:active {
+  background-color: #50422B;
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
+}
+
+/* Animations */
+@keyframes fadeInMessage {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.fade-in {
+  animation: fadeInMessage var(--message-fade-in-duration) ease-out forwards;
+}
+
+/* Scrollbar Styling for Webkit Browsers */
+#chat-history::-webkit-scrollbar {
+  width: 10px;
+}
+
+#chat-history::-webkit-scrollbar-track {
+  background: var(--primary-bg);
+  border-radius: 10px;
+}
+
+#chat-history::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 10px;
+  border: 3px solid var(--primary-bg);
+}
+
+#chat-history::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent-color);
+}
+
+/* Error Message Styling */
+.error-message {
+  background-color: #FFE5E5;
+  border: 1px solid #FFCCCC;
+  color: #B22222;
+  align-self: center;
+  max-width: 70%;
+  text-align: center;
+  font-size: 0.9em;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.error-message p {
+  margin: 0;
+}
+
+/* Typing Indicator Styling */
+.typing-indicator {
+  align-self: flex-start;
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+  font-style: italic;
+  padding: 12px 20px;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px var(--shadow-color);
+  animation: pulseDots 1.5s infinite ease-in-out;
+  max-width: fit-content;
+}
+
+.typing-indicator p {
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes pulseDots {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  .chat-wrapper {
+    margin: 10px;
+    border-radius: 10px;
+  }
+
+  .chat-header {
+    padding: 20px 20px 15px;
+  }
+
+  .chat-header h1 {
+    font-size: 2em;
+  }
+
+  .chat-header p {
+    font-size: 1em;
+  }
+
+  #chat-history {
+    padding: 20px;
+    max-height: 60vh;
+  }
+
+  .message {
+    font-size: 0.95em;
+    padding: 12px 18px;
+    max-width: 85%;
+  }
+
+  .chat-form {
+    flex-direction: column;
+    padding: 15px 20px;
+    gap: 10px;
+  }
+
+  #user-input {
+    width: 100%;
+    padding: 12px 18px;
+  }
+
+  .chat-form button {
+    width: 100%;
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  #chat-history {
+    padding: 15px;
+    max-height: 55vh;
+  }
+
+  .message {
+    padding: 10px 15px;
+    font-size: 0.9em;
+  }
+
+  .chat-header h1 {
+    font-size: 1.8em;
+  }
+}
