@@ -117,3 +117,10 @@ You can also adjust fonts by changing the `font-family` properties in `styles.cs
 ## 🤝 Contributing
 
 Contributions are welcome\! If you have suggestions for improvements, bug fixes, or new features, please open an issue or submit a pull request.
+
+---
+
+<video src="./Whispering Words - Gemini AI Chat - Brave 2025-07-15 22-58-23.mp4" controls width="600">
+  Your browser does not support the video tag.
+</video>
+
